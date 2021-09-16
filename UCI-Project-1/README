@@ -79,7 +79,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-[docker ps](aj-fay/UCI-Project-1/UCI-Project-1/Images/ELK-dockerps.JPG)
+![docker ps](aj-fay/UCI-Project-1/UCI-Project-1/Images/ELK-dockerps.jpg)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
