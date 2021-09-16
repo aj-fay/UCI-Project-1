@@ -22,7 +22,12 @@ This document contains the following details:
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
 Load balancing ensures that the application will be highly efficient and responsive, in addition to restricting unwanted traffic to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+- Load balancers create greater availability to the servers. They allow web traffic to be distributed accross multiple servers in order to keep up performance and efficiency.
+- The advantages of having a JumpBox include:
+  - Improved security by only allowing SSH from a host computer that contains the proper key
+  - Ability to run playbooks across multiple machines as a host
+  - Giving the ability of customization in order to enhance network security
+  - Centralizaed administration management
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file systems and system metrics.
 - Filebeat watches any log files or specified locations and sends them to Elasticsearch or Logstash.
@@ -42,7 +47,7 @@ _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdow
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the JumpBox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
+Only the JumpBox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP address:
 - My IP 172.**.**.**/32
 
 Machines within the network can only be accessed by SSH on port 22 with the JumpBox.
