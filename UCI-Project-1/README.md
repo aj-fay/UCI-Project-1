@@ -7,7 +7,7 @@ The files in this repository were used to configure the network depicted below.
 These files have been tested and used to generate a live ELK deployment on AWS. They can be used to either recreate the entire deployment 
 pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
-  -!(https://github.com/aj-fay/UCI-Project-1/blob/master/UCI-Project-1/Repository/filebeat-playbook.yaml)
+  -![Filebeat Playbook](https://github.com/aj-fay/UCI-Project-1/blob/master/UCI-Project-1/Repository/filebeat-playbook.yaml)
 
 This document contains the following details:
 - Description of the Topologu
