@@ -4,7 +4,8 @@ The files in this repository were used to configure the network depicted below.
 
 ![TODO: Update the path with the name of your diagram](Images/diagram_filename.png)
 
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
+These files have been tested and used to generate a live ELK deployment on AWS. They can be used to either recreate the entire deployment 
+pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
   - _TODO: Enter the playbook file._
 
@@ -21,76 +22,88 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly efficient and responsive, in addition to restricting unwanted traffic to 
+the network.
+- Load balancers create greater availability to the servers. They allow web traffic, memory capacity, and CPU load to be
+  distributed accross multiple servers in order to keep up performance and efficiency.
+- The advantages of having a JumpBox include:
+  - Improved security by only allowing SSH from a host computer that contains the proper key
+  - Ability to run playbooks across multiple machines as a host
+  - Giving the ability of customization in order to enhance network security
+  - Centralizaed administration management
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the file systems and system metrics.
+- Filebeat watches any log files or specified locations and sends them to Elasticsearch or Logstash.
+- Metricbeat records metrics from the OS and other services running on the server.
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
-| Name     | Function | IP Address | Operating System |
-|----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| Name       | Function        | IP Address   | Operating System    |
+|------------|-----------------|--------------|---------------------|
+| Jump Box   | Gateway         | 172.**.*.76  | Amazon Linux 2      |
+| WebServer1 | Application     | 172.**.**.23 | Amazon Linux 2      |
+| WebServer2 | Application     | 172.**.**.50 | Amazon Linux 2      |
+| ELK Server | Database Logger | 172.**.**.66 | Ubuntu Server 20.04 |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the JumpBox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP address:
+- My personal IP 47.***.*.***/32
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by SSH on port 22 with the JumpBox.
+- The JumpBox is the only machine that is allowed to access the ELK VM with the IP of 172.**.*.76
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| Name       | Publicly Accessible | Allowed IP Addresses |
+|------------|---------------------|----------------------|
+| JumpBox    |          No         |    42.***.*.***/32   |
+| WebServer1 |         Yes         |       0.0.0.0/0      |
+| WebServer2 |         Yes         |       0.0.0.0/0      |
+| ELK        |          No         |      172.**.*.76     |
 
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- There would be less human error involved and less time would be required to configure the ELK machine.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+- Download docker.io
+- Increase virtual memory
+- Install python3-pip
+- Install docker python module
+- Download and launch ELK web container
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+!(https://github.com/aj-fay/UCI-Project-1/blob/master/UCI-Project-1/Images/ELK-dockerps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- WebServer1: 172.**.**.23
+- Webserver2: 172.**.**.50
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat
+- Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+- Filebeat collects log messages and other specified log events and sends them to a designated output. You would be able to see audit
+  logs, gc logs, deprecation logs, slow logs, and server logs.
+- Metricbeat collects metrics and statistics of memory, CPU, or any data related to the specified target.
 
 ### Using the Playbook
-In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
+In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node
+provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the "filebeat-config.yml" file to "ELK VM."
+- Update the "hosts" file to include web server private IP addresses and ELK server private IP address. You can specify the machines by
+  creating two different host groups; one for web servers and another for elk.
+- Run the playbook, and navigate to Kibana via <ELK public IP:5601> to check that the installation worked as expected.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
