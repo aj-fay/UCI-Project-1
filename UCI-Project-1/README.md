@@ -49,7 +49,7 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 The machines on the internal network are not exposed to the public Internet. 
 
 Only the JumpBox machine can accept connections from the Internet. Access to this machine is only allowed from the following IP address:
-- My personal IP 47.---.-.---/32
+- My personal IP 47.---.-.---
 
 Machines within the network can only be accessed by SSH on port 22 with the JumpBox.
 - The JumpBox is the only machine that is allowed to access the ELK VM with the IP of 172.--.-.76
@@ -66,7 +66,7 @@ A summary of the access policies in place can be found in the table below.
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- There would be less human error involved and less time would be required to configure the ELK machine.
+- There would be less human error and time involved in order to configure the ELK machine.
 
 The playbook implements the following tasks:
 - Download docker.io
