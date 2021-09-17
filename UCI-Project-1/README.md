@@ -36,8 +36,6 @@ Integrating an ELK server allows users to easily monitor the vulnerable VMs for 
 - Filebeat watches any log files or specified locations and sends them to Elasticsearch or Logstash.
 - Metricbeat records metrics from the OS and other services running on the server.
 
-The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name       | Function        | IP Address   | Operating System    |
 |------------|-----------------|--------------|---------------------|
@@ -54,7 +52,7 @@ Only the JumpBox machine can accept connections from the Internet. Access to thi
 - My personal IP 47.---.-.---/32
 
 Machines within the network can only be accessed by SSH on port 22 with the JumpBox.
-- The JumpBox is the only machine that is allowed to access the ELK VM with the IP of 172.**.*.76
+- The JumpBox is the only machine that is allowed to access the ELK VM with the IP of 172.--.-.76
 
 A summary of the access policies in place can be found in the table below.
 
