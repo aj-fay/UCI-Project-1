@@ -58,7 +58,7 @@ A summary of the access policies in place can be found in the table below.
 
 | Name       | Publicly Accessible | Allowed IP Addresses |
 |------------|---------------------|----------------------|
-| JumpBox    |          No         |    42.---.-.---/32   |
+| JumpBox    |          No         |      42.---.-.---    |
 | WebServer1 |         Yes         |       0.0.0.0/0      |
 | WebServer2 |         Yes         |       0.0.0.0/0      |
 | ELK        |          No         |      172.--.-.76     |
